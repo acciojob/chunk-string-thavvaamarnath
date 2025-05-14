@@ -1,21 +1,16 @@
-function chunkString(str, chunkLength) {
-    // Return empty array if input string is null
-    if (str === null) return [];
+function validEmail(str) {
+    // Return false for empty input
+    if (!str) return false;
 
-    // Initialize an empty array to store the chunks
-    let result = [];
+    // Regular expression for validating email format
+    const emailRegex = /^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/;
 
-    // Loop through the string in steps of chunkLength
-    for (let i = 0; i < str.length; i += chunkLength) {
-        // Push each chunk into the result array
-        result.push(str.slice(i, i + chunkLength));
-    }
-
-    return result;
+    return emailRegex.test(str);
 }
 
-// Example usage:
-console.log(chunkString("Hello, world!", 5)); // ["Hello", ", wor", "ld!"]
-console.log(chunkString("12345", 2));         // ["12", "34", "5"]
-console.log(chunkString("abc", 5));           // ["abc"]
-console.log(chunkString(null, 3));            // []
+// Test cases
+console.log(validEmail('abc@example.com'));     // true
+console.log(validEmail('xyz@abc.com.in'));      // true
+console.log(validEmail('john.doe@com.'));       // false
+console.log(validEmail('@example.com'));        // false
+console.log(validEmail(''));                    // false
